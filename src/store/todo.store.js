@@ -62,7 +62,13 @@ const addTodo = ( description ) => {
  */
 
 const toggleTodo = ( todoId ) => {
-    throw new Error('Not implemented');
+    
+    state.todos = state.todos.map( todo => {
+        if ( todo.id === todoId ) {
+            todo.done = !todo.done;
+        }
+        return todo;
+    });
 
 }
 
