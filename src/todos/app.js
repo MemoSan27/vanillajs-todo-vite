@@ -6,6 +6,7 @@ import { renderTodos } from './use-cases';
 const ElementIDS = {
     TodoList: '.todo-list',
     NewTodoInput: '#new-todo-input',
+   
 }
 
 /**
@@ -33,6 +34,7 @@ export const App = ( elementId ) => {
 
     //Referencias HTML
     const newDescriptionInput = document.querySelector( ElementIDS.NewTodoInput );
+    const todoListUL = document.querySelector( ElementIDS.TodoList ); 
 
     //Listeners
     newDescriptionInput.addEventListener( 'keyup', ( event ) => {
@@ -43,6 +45,22 @@ export const App = ( elementId ) => {
             displayTodos();
 
             event.target.value = '';
+    });
+
+    todoListUL.addEventListener('click', ( event ) => {
+        const element = event.target.closest('[data-id]');
+        todoStore.toggleTodo(element.getAttribute('data-id'));
+        displayTodos();
+    });
+
+    todoListUL.addEventListener('click', ( event ) => {
+        const isDestroyElement = event.target.className === 'destroy';
+        const element = event.target.closest('[data-id]');
+        
+        if( !element || !isDestroyElement ) return;
+        
+        todoStore.deleteTodo(element.getAttribute('data-id'));
+        displayTodos();
     });
 
 }
