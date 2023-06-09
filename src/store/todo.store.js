@@ -62,26 +62,26 @@ const addTodo = ( description ) => {
  */
 
 const toggleTodo = ( todoId ) => {
-    throw new Error('Not implemented')
+    throw new Error('Not implemented');
 
 }
 
 const deleteTodo = ( todoId ) => {
-    state.todos = state.todos.filter( todo => todo.id !== todoId )
+    state.todos = state.todos.filter( todo => todo.id !== todoId );
 
 }
 
-const deleteCompleted = ( ) => {
+const deleteCompleted = () => {
     state.todos = state.todos.filter( todo => todo.done );
 
 }
 
 const setFilter = ( newFilter = Filters.All ) => {
-    throw new Error('Not implemented')
+    state.filter = newFilter;
 }
 
-const getCurrentFilter = (  ) => {
-    throw new Error('Not implemented')
+const getCurrentFilter = () => {
+    return state.filter;
 }
 
 
