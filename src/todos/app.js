@@ -26,6 +26,7 @@ export const App = ( elementId ) => {
         app.innerHTML = html;
         document.querySelector(elementId).append( app );
         displayTodos();
+        
     })();
 
 }
