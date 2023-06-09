@@ -29,6 +29,10 @@ const loadStore = () => {
 }
 
 
+const getTodos = ( filter = Filters.All) =>{
+
+}
+
 /**
  * 
  * @param {String} description 
