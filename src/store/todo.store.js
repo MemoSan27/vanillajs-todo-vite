@@ -11,6 +11,8 @@ const state = {
         new Todo('Piedra del alma'),
         new Todo('Piedra del infinito'),
         new Todo('Piedra del tiempo'),
+        new Todo('Piedra del realidad'),
+        new Todo('Piedra del mentira'),
 
     ],
     
