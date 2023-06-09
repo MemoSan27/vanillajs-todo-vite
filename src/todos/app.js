@@ -1,11 +1,14 @@
-import todoStore from '../store/todo.store';
+import todoStore, { Filters } from '../store/todo.store';
 import html from './app.html?raw';
 import { renderTodos } from './use-cases';
 
 
 const ElementIDS = {
+    ClearCompletedButton: '.clear-completed',
     TodoList: '.todo-list',
     NewTodoInput: '#new-todo-input',
+    TodoFilters: '.filtro',
+    
    
 }
 
@@ -35,6 +38,8 @@ export const App = ( elementId ) => {
     //Referencias HTML
     const newDescriptionInput = document.querySelector( ElementIDS.NewTodoInput );
     const todoListUL = document.querySelector( ElementIDS.TodoList ); 
+    const clearCompletedButton = document.querySelector( ElementIDS.ClearCompletedButton );
+    const filtersLI = document.querySelectorAll( ElementIDS.TodoFilters ); 
 
     //Listeners
     newDescriptionInput.addEventListener( 'keyup', ( event ) => {
@@ -61,6 +66,34 @@ export const App = ( elementId ) => {
         
         todoStore.deleteTodo(element.getAttribute('data-id'));
         displayTodos();
+    });
+
+    
+
+    clearCompletedButton.addEventListener('click', (event) => {
+             
+        todoStore.deleteCompleted();
+        displayTodos();
+    })
+
+    filtersLI.forEach( element => {
+        element.addEventListener('click', (element) => {
+            filtersLI.forEach( el => el.classList.remove('selected'));
+            element.target.classList.add('selected');
+
+            switch ( element.target.text ){
+                case 'Todos':
+                    todoStore.setFilter( Filters.All )
+                break;
+                case 'Pendientes':
+                    todoStore.setFilter( Filters.Pending )
+                break;    
+                case 'Completados':
+                    todoStore.setFilter( Filters.Completed )
+                break;    
+            }
+            displayTodos();
+        });
     });
 
 }
